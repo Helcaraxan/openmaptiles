@@ -57,15 +57,15 @@ tables:
   aeroway_polygon:
     type: polygon
     columns:
-    - *ref
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    - name: aeroway
-      type: mapping_value
-    - name: area
-      type: area
+      - *ref
+      - name: osm_id
+        type: id
+      - name: geometry
+        type: geometry
+      - name: aeroway
+        type: mapping_value
+      - name: area
+        type: area
     mapping:
       aeroway: *aeroway_polygon_mapping
       "area:aeroway": *aeroway_polygon_mapping
@@ -74,31 +74,31 @@ tables:
   aeroway_linestring:
     type: linestring
     columns:
-    - *ref
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    - name: aeroway
-      key: aeroway
-      type: string
+      - *ref
+      - name: osm_id
+        type: id
+      - name: geometry
+        type: geometry
+      - name: aeroway
+        key: aeroway
+        type: string
     mapping:
       aeroway:
-      - runway
-      - taxiway
-      
+        - runway
+        - taxiway
+
   # etldoc: imposm3 -> osm_aeroway_point
   aeroway_point:
     type: point
     columns:
-    - *ref
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    - name: aeroway
-      key: aeroway
-      type: string
+      - *ref
+      - name: osm_id
+        type: id
+      - name: geometry
+        type: geometry
+      - name: aeroway
+        key: aeroway
+        type: string
     mapping:
       aeroway:
-      - gate
+        - gate

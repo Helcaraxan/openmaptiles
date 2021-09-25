@@ -8,7 +8,6 @@ CREATE OR REPLACE FUNCTION layer_poi(bbox geometry, zoom_level integer, pixel_wi
                 geometry geometry,
                 name     text,
                 name_en  text,
-                name_de  text,
                 tags     hstore,
                 class    text,
                 subclass text,
@@ -24,18 +23,9 @@ SELECT osm_id_hash AS osm_id,
        geometry,
        NULLIF(name, '') AS name,
        COALESCE(NULLIF(name_en, ''), name) AS name_en,
-       COALESCE(NULLIF(name_de, ''), name, name_en) AS name_de,
        tags,
        poi_class(subclass, mapping_key) AS class,
-       CASE
-           WHEN subclass = 'information'
-               THEN NULLIF(information, '')
-           WHEN subclass = 'place_of_worship'
-               THEN NULLIF(religion, '')
-           WHEN subclass = 'pitch'
-               THEN NULLIF(sport, '')
-           ELSE subclass
-           END AS subclass,
+       subclass,
        agg_stop,
        NULLIF(layer, 0) AS layer,
        "level",

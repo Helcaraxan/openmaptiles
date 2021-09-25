@@ -25,17 +25,14 @@ CREATE OR REPLACE FUNCTION layer_mountain_peak(bbox geometry,
                                                pixel_width numeric)
     RETURNS TABLE
             (
-                osm_id          bigint,
-                geometry        geometry,
-                name            text,
-                name_en         text,
-                name_de         text,
-                class           text,
-                tags            hstore,
-                ele             int,
-                ele_ft          int,
-                customary_ft    int,
-                "rank"          int
+                osm_id   bigint,
+                geometry geometry,
+                name     text,
+                name_en  text,
+                class    text,
+                tags     hstore,
+                ele      int,
+                "rank"   int
             )
 AS
 $$
@@ -45,23 +42,17 @@ SELECT
     geometry,
     name,
     name_en,
-    name_de,
     tags->'natural' AS class,
     tags,
     ele::int,
-    ele_ft::int,
-    customary_ft,
     rank::int
 FROM (
          SELECT osm_id,
                 geometry,
                 name,
                 COALESCE(NULLIF(name_en, ''), name) AS name_en,
-                COALESCE(NULLIF(name_de, ''), name, name_en) AS name_de,
                 tags,
                 substring(ele FROM E'^(-?\\d+)(\\D|$)')::int AS ele,
-                round(substring(ele FROM E'^(-?\\d+)(\\D|$)')::int * 3.2808399)::int AS ele_ft,
-                CASE WHEN iso_a2 = 'US' THEN 1 END AS customary_ft,
                 row_number() OVER (
                     PARTITION BY LabelGrid(geometry, 100 * pixel_width)
                     ORDER BY (

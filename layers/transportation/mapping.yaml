@@ -1,48 +1,48 @@
 generalized_tables:
-# etldoc: osm_railway_linestring_gen_z9 -> osm_railway_linestring_gen_z8
+  # etldoc: osm_railway_linestring_gen_z9 -> osm_railway_linestring_gen_z8
   railway_linestring_gen_z8:
     source: railway_linestring_gen_z9
     tolerance: ZRES9
 
-# etldoc: osm_railway_linestring_gen_z10 -> osm_railway_linestring_gen_z9
+  # etldoc: osm_railway_linestring_gen_z10 -> osm_railway_linestring_gen_z9
   railway_linestring_gen_z9:
     source: railway_linestring_gen_z10
     tolerance: ZRES10
 
-# etldoc: osm_railway_linestring_gen_z11 -> osm_railway_linestring_gen_z10
+  # etldoc: osm_railway_linestring_gen_z11 -> osm_railway_linestring_gen_z10
   railway_linestring_gen_z10:
     source: railway_linestring_gen_z11
     tolerance: ZRES11
 
-# etldoc: osm_railway_linestring_gen_z12 -> osm_railway_linestring_gen_z11
+  # etldoc: osm_railway_linestring_gen_z12 -> osm_railway_linestring_gen_z11
   railway_linestring_gen_z11:
     source: railway_linestring_gen_z12
     tolerance: ZRES12
 
-# etldoc: osm_railway_linestring -> osm_railway_linestring_gen_z12
+  # etldoc: osm_railway_linestring -> osm_railway_linestring_gen_z12
   railway_linestring_gen_z12:
     source: railway_linestring
     sql_filter: railway IN ('rail', 'narrow_gauge', 'light_rail') AND service='' AND ST_IsValid(geometry)
     tolerance: ZRES13
 
-# etldoc: osm_aerialway_linestring -> osm_aerialway_linestring_gen_z12
+  # etldoc: osm_aerialway_linestring -> osm_aerialway_linestring_gen_z12
   aerialway_linestring_gen_z12:
     source: aerialway_linestring
     sql_filter: ST_IsValid(geometry)
     tolerance: ZRES13
 
-# etldoc: osm_shipway_linestring_gen_z12 -> osm_shipway_linestring_gen_z11
+  # etldoc: osm_shipway_linestring_gen_z12 -> osm_shipway_linestring_gen_z11
   shipway_linestring_gen_z11:
     source: shipway_linestring_gen_z12
     tolerance: ZRES12
 
-# etldoc: osm_shipway_linestring -> osm_shipway_linestring_gen_z12
+  # etldoc: osm_shipway_linestring -> osm_shipway_linestring_gen_z12
   shipway_linestring_gen_z12:
     source: shipway_linestring
     sql_filter: ST_IsValid(geometry)
     tolerance: ZRES13
 
-# etldoc: osm_highway_linestring -> osm_highway_linestring_gen_z11
+  # etldoc: osm_highway_linestring -> osm_highway_linestring_gen_z11
   highway_linestring_gen_z11:
     source: highway_linestring
     sql_filter: (highway IN ('motorway', 'trunk', 'primary', 'secondary', 'tertiary', 'motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary_link', 'busway') OR highway = 'construction' AND construction IN ('motorway', 'trunk', 'primary', 'secondary', 'tertiary', 'motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary_link', 'busway')) AND NOT is_area AND ST_IsValid(geometry)
@@ -55,10 +55,6 @@ name_field: &name
 name_en_field: &name_en
   name: name_en
   key: name:en
-  type: string
-name_de_field: &name_de
-  name: name_de
-  key: name:de
   type: string
 short_name_field: &short_name
   key: short_name
@@ -165,7 +161,7 @@ expressway_field: &expressway
   type: bool
 
 tables:
-# etldoc: imposm3 -> osm_highway_linestring
+  # etldoc: imposm3 -> osm_highway_linestring
   highway_linestring:
     type: linestring
     _resolve_wikidata: false
@@ -240,122 +236,119 @@ tables:
       - busway
       - construction
       public_transport:
-      - platform
+        - platform
       man_made:
       - pier
       service:
       - driveway
       - parking_aisle
 
-# etldoc: imposm3 -> osm_railway_linestring
+  # etldoc: imposm3 -> osm_railway_linestring
   railway_linestring:
     type: linestring
     _resolve_wikidata: false
     columns:
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    - key: railway
-      name: railway
-      type: string
-    - *ref
-    - *network
-    - *z_order
-    - *layer
-    - *level
-    - *indoor
-    - *name
-    - *name_en
-    - *name_de
-    - name: tags
-      type: hstore_tags
-    - *short_name
-    - *tunnel
-    - *bridge
-    - *ramp
-    - *ford
-    - *oneway
-    - *area
-    - *service
-    - *usage
+      - name: osm_id
+        type: id
+      - name: geometry
+        type: geometry
+      - key: railway
+        name: railway
+        type: string
+      - *ref
+      - *network
+      - *z_order
+      - *layer
+      - *level
+      - *indoor
+      - *name
+      - *name_en
+      - name: tags
+        type: hstore_tags
+      - *short_name
+      - *tunnel
+      - *bridge
+      - *ramp
+      - *ford
+      - *oneway
+      - *area
+      - *service
+      - *usage
     mapping:
       railway:
-      - rail
-      - narrow_gauge
-      - preserved
-      - funicular
-      - subway
-      - light_rail
-      - monorail
-      - tram
+        - rail
+        - narrow_gauge
+        - preserved
+        - funicular
+        - subway
+        - light_rail
+        - monorail
+        - tram
 
-# etldoc: imposm3 -> osm_aerialway_linestring
+  # etldoc: imposm3 -> osm_aerialway_linestring
   aerialway_linestring:
     type: linestring
     _resolve_wikidata: false
     columns:
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    - key: aerialway
-      name: aerialway
-      type: string
-    - *z_order
-    - *layer
-    - *name
-    - *name_en
-    - *name_de
-    - name: tags
-      type: hstore_tags
-    - *short_name
-    - *tunnel
-    - *bridge
-    - *ramp
-    - *ford
-    - *oneway
-    - *area
-    - *service
-    - *usage
+      - name: osm_id
+        type: id
+      - name: geometry
+        type: geometry
+      - key: aerialway
+        name: aerialway
+        type: string
+      - *z_order
+      - *layer
+      - *name
+      - *name_en
+      - name: tags
+        type: hstore_tags
+      - *short_name
+      - *tunnel
+      - *bridge
+      - *ramp
+      - *ford
+      - *oneway
+      - *area
+      - *service
+      - *usage
     mapping:
       aerialway:
-      - cable_car
-      - gondola
+        - cable_car
+        - gondola
 
-# etldoc: imposm3 -> osm_shipway_linestring
+  # etldoc: imposm3 -> osm_shipway_linestring
   shipway_linestring:
     type: linestring
     _resolve_wikidata: false
     columns:
-    - name: osm_id
-      type: id
-    - name: geometry
-      type: geometry
-    - key: route
-      name: shipway
-      type: string
-    - *z_order
-    - *layer
-    - *name
-    - *name_en
-    - *name_de
-    - name: tags
-      type: hstore_tags
-    - *short_name
-    - *tunnel
-    - *bridge
-    - *ramp
-    - *ford
-    - *oneway
-    - *area
-    - *service
-    - *usage
+      - name: osm_id
+        type: id
+      - name: geometry
+        type: geometry
+      - key: route
+        name: shipway
+        type: string
+      - *z_order
+      - *layer
+      - *name
+      - *name_en
+      - name: tags
+        type: hstore_tags
+      - *short_name
+      - *tunnel
+      - *bridge
+      - *ramp
+      - *ford
+      - *oneway
+      - *area
+      - *service
+      - *usage
     mapping:
       route:
-      - ferry
+        - ferry
 
-# etldoc: imposm3 -> osm_highway_polygon
+  # etldoc: imposm3 -> osm_highway_polygon
   highway_polygon:
     type: polygon
     columns:
@@ -379,18 +372,18 @@ tables:
     - *service
     mapping:
       highway:
-      - path
-      - cycleway
-      - bridleway
-      - footway
-      - corridor
-      - pedestrian
-      - steps
+        - path
+        - cycleway
+        - bridleway
+        - footway
+        - corridor
+        - pedestrian
+        - steps
       public_transport:
-      - platform
+        - platform
       man_made:
-      - bridge
-      - pier
+        - bridge
+        - pier
 
   # etldoc: imposm3 -> highway_point
   highway_point:

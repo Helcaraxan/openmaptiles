@@ -13,57 +13,50 @@ tables:
         admin_level: [__any__]
         boundary: [administrative]
     columns:
-    - name: relation_id
-      type: id
-    - name: osm_id
-      type: id
-      from_member: true
-    - name: member
-      type: member_id
-    - name: type
-      type: member_type
-    - name: geometry
-      type: geometry
-    - key: name
-      name: name
-      type: string
-      # Used for disputed boundary, e.g. "Line of actual control"
-      from_member: true
-    - key: admin_level
-      name: admin_level
-      type: integer
-    - key: claimed_by
-      name: claimed_by
-      type: string
-    - key: disputed_by
-      name: disputed_by
-      type: string
-      from_member: true
-    - key: dispute 
-      name: dispute 
-      type: bool
-      from_member: true
-    - key: disputed
-      name: disputed
-      type: bool
-      from_member: true
-    - key: border_status
-      name: border_status
-      type: string
-      from_member: true
-    - key: maritime
-      name: maritime
-      type: bool
-      from_member: true
-    - key: boundary_type
-      name: boundary_type
-      type: string
-      from_member: true
-    - key: natural
-      name: natural
-      type: string
-      from_member: true
-    relation_types: [boundary]
+      - name: relation_id
+        type: id
+      - name: osm_id
+        type: id
+        from_member: true
+      - name: member
+        type: member_id
+      - name: geometry
+        type: geometry
+      - key: name
+        name: name
+        type: string
+        # Used for disputed boundary, e.g. "Line of actual control"
+        from_member: true
+      - key: admin_level
+        name: admin_level
+        type: integer
+      - key: claimed_by
+        name: claimed_by
+        type: string
+      - key: disputed_by
+        name: disputed_by
+        type: string
+        from_member: true
+      - key: dispute 
+        name: dispute 
+        type: bool
+        from_member: true
+      - key: disputed
+        name: disputed
+        type: bool
+        from_member: true
+      - key: border_status
+        name: border_status
+        type: string
+        from_member: true
+      - key: maritime
+        name: maritime
+        type: bool
+        from_member: true
+      - key: natural
+        name: natural
+        type: string
+        from_member: true
     mapping:
       boundary:
       - administrative
